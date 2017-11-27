@@ -12,9 +12,9 @@ class BitSetTests: XCTestCase {
 
 //        XCTAssertEqual(a.contains(1), true)
 //        XCTAssertEqual(a.contains(6), false)
-        print(a.contains(6))
+//        print(a.contains(6))
 
-//        print(a)
+        print(a)
 
     }
 

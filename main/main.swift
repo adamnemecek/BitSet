@@ -7,15 +7,18 @@
 
 import Foundation
 
-let a: BitSet<UInt32> = [1,2,3,4, 10, 31]
+//let a: BitSet<UInt32> = [1,2,3,4, 10, 31]
+//
+//print(a)
+//print(a.count, a.startIndex, a.endIndex)
+//for e in a {
+//    print(e)
+//}
 
-print(a)
-print(a.count, a.startIndex, a.endIndex)
-for e in a {
-    print(e)
-}
+//print(a)
+let b: BitSet<UInt64> = [1,2,3,4]
 
-
+print(b)
 //public struct PitchSet: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
 //    public struct Index : Comparable {
 //        fileprivate let value : Int

@@ -88,7 +88,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public func index(after i: Index) -> Index {
-        //return .init(content: i.content + 1)
         let j = i.content + 1
         let mask  = (content >> j) << j
 
