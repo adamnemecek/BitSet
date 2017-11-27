@@ -98,7 +98,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return .init(content: mask.trailingZeroBitCount)
     }
 
-
     /// Removes the elements of this set that aren't also in the given set.
     ///
     /// In the following example, the elements of the `employees` set that are

@@ -16,8 +16,11 @@ import Foundation
 //}
 
 //print(a)
-let b: BitSet<UInt64> = [1,2,3,4]
+let b: BitSet<UInt64> = [1,2,3,4, 30]
 
+//for e in b {
+//    print(e)
+//}
 print(b)
 //public struct PitchSet: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
 //    public struct Index : Comparable {
