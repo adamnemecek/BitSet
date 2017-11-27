@@ -10,7 +10,8 @@ extension String {
 }
 
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible {
-//    public typealias Element = Base
+
+    public typealias Key = Int
     public typealias IndexDistance = Int
 
     public struct Index : Equatable, Comparable {
@@ -79,8 +80,18 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return content.nonzeroBitCount
     }
 
+    public func index(for key: Key) -> Index {
+        return .init(content: key)
+    }
+
     public subscript(index : Index) -> Element {
         return .init(index.content)
+    }
+
+    public subscript(key : Key) -> Element? {
+        let e = Element(key)
+        guard contains(e) else { return nil }
+        return e
     }
 
     public func index(after i: Index) -> Index {
