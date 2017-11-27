@@ -7,9 +7,10 @@
 
 import Foundation
 
-let a: BitSet<UInt16> = [1,2,3,4, 10, 16]
+let a: BitSet<UInt32> = [1,2,3,4, 10, 31]
 
 print(a)
+print(a.count, a.startIndex, a.endIndex)
 for e in a {
     print(e)
 }

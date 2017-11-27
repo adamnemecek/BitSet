@@ -93,9 +93,9 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         let mask  = (content >> j) << j
 
         let n = content & mask
-        if n == 0 {
-            return endIndex
-        }
+//        if n == 0 {
+//            return endIndex
+//        }
         return .init(content: n.trailingZeroBitCount)
     }
 
@@ -320,7 +320,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public func contains(_ member: Element) -> Bool {
-        return (content & member) != 0
+        return (content & (1 << member)) != 0
     }
 
     public var isEmpty: Bool {
