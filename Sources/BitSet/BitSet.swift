@@ -5,7 +5,6 @@ extension MemoryLayout {
     }
 }
 
-
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
 
     public typealias Key = Int
@@ -21,6 +20,10 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         public static func <(lhs: Index, rhs: Index) -> Bool {
             return lhs.content < rhs.content
         }
+    }
+
+    public static var max : Element {
+        return Element(MemoryLayout<Element>.bitSize)
     }
 
     private let content : Element
@@ -75,7 +78,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public func index(after i: Index) -> Index {
-        /// find what should be the next one
+        /// find what should be the next one, note that max value is Element.bitSize
         let j = i.content + 1
         /// drop the first six bits from content to find the next element
         let mask  = (content >> j) << j
@@ -233,7 +236,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
         /// check that the value is valid
-        assert(newMember < MemoryLayout<Element>.bitSize)
+        assert(newMember < .max)
         defer {
             self = .init(content: content | (1 << newMember))
         }
