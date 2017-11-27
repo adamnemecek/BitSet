@@ -1,6 +1,6 @@
 
 
-public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection {
+public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral {
 //    public typealias Element = Base
     public typealias IndexDistance = Int
 
@@ -24,6 +24,10 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
 
     public init() {
         self.content = 0
+    }
+
+    public init(arrayLiteral literal: Element...) {
+        content = literal.reduce(0) { $0 | $1 }
     }
 
     /// Removes the elements of the set that are also in the given set and adds
