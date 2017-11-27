@@ -8,6 +8,12 @@ class BitSetTests: XCTestCase {
         // results.
         XCTAssertEqual(BitSet<UInt64>().count, 0)
 
+        let a: BitSet<UInt64> = [1,2,3,4]
+
+        XCTAssertEqual(a.contains(1), true)
+        XCTAssertEqual(a.contains(6), false)
+        print(a)
+
     }
 
 

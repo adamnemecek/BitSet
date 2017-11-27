@@ -1,6 +1,15 @@
 
 
-public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral {
+
+extension String {
+//    func pad(to: Int) -> String {
+//        if count < to {
+//            return
+//        }
+//    }
+}
+
+public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible {
 //    public typealias Element = Base
     public typealias IndexDistance = Int
 
@@ -27,7 +36,13 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public init(arrayLiteral literal: Element...) {
-        content = literal.reduce(0) { $0 | $1 }
+        content = literal.reduce(0) { $0 | (1 << $1) }
+        print(String(content, radix: 2), content)
+
+    }
+
+    public var description: String {
+        return map { $0.description }.joined(separator: ", ")
     }
 
     /// Removes the elements of the set that are also in the given set and adds
@@ -52,11 +67,13 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var startIndex: Index {
-        return Index(content: content.leadingZeroBitCount)
+        print("start ", content.trailingZeroBitCount)
+        return Index(content: content.trailingZeroBitCount)
     }
 
     public var endIndex: Index {
-        return Index(content: content.trailingZeroBitCount)
+        print("end ", content.leadingZeroBitCount)
+        return Index(content: content.leadingZeroBitCount)
     }
 
     public var count : IndexDistance {
@@ -194,7 +211,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
         defer {
-            content =  content | newMember
+            content = content | newMember
         }
         return (contains(newMember), newMember)
     }
@@ -240,6 +257,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     /// - Note: if this set and `other` contain elements that are equal but
     ///   distinguishable (e.g. via `===`), which of these elements is present
     ///   in the result is unspecified.
+
 
     public func intersection(_ other: BitSet) -> BitSet {
         return BitSet(content: content & other.content)
