@@ -1,6 +1,10 @@
 import XCTest
 @testable import BitSet
 
+extension Set {
+
+}
+
 class BitSetTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
