@@ -9,6 +9,12 @@ extension String {
 //    }
 }
 
+extension MemoryLayout {
+    static var bitSize : Int {
+        return size * 8
+    }
+}
+
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible {
 
     public typealias Key = Int
@@ -73,7 +79,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var endIndex: Index {
-        return Index(content: MemoryLayout<Element>.size * 8 - content.leadingZeroBitCount)
+        return Index(content: MemoryLayout<Element>.bitSize - content.leadingZeroBitCount)
     }
 
     public var count : IndexDistance {
@@ -230,7 +236,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     ///   other means.
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
-        let max = MemoryLayout<Element>.size * 8
+        let max = MemoryLayout<Element>.bitSize
         assert(newMember < max)
         defer {
             content |= (1 << newMember)
