@@ -23,7 +23,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         }
     }
 
-    private var content : Element
+    private let content : Element
 
     private init(content : Element) {
         self.content = content
@@ -195,7 +195,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     @discardableResult
     public mutating func remove(_ member: Element) -> Element? {
         defer {
-            content = (content ^ (1 << member))
+            self = .init(content: content ^ (1 << member))
         }
         return contains(member) ? member : nil
     }
@@ -235,7 +235,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         /// check that the value is valid
         assert(newMember < MemoryLayout<Element>.bitSize)
         defer {
-            content |= (1 << newMember)
+            self = .init(content: content | (1 << newMember))
         }
         return (contains(newMember), newMember)
     }
