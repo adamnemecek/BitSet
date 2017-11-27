@@ -15,6 +15,9 @@ class BitSetTests: XCTestCase {
 
         XCTAssertEqual(a.count, 4)
 
+
+        XCTAssert(a.map { $0 }.elementsEqual([1,2,3,4]))
+        
 //        print(a)
 
     }
