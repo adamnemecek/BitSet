@@ -22,7 +22,12 @@ class BitSetTests: XCTestCase {
 
         XCTAssert(a.map { $0 }.elementsEqual([1,2,3,4]))
 
+        var q : BitSet<UInt64> = []
 
+        for e in 0...20 {
+            q.insert(UInt64(e))
+        }
+        print(q)
 
 //        XCTAssertEqual(a + [1,10], )
 
