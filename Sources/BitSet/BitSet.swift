@@ -13,6 +13,10 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     public struct Index : Equatable, Comparable {
         fileprivate let content : Int
 
+        fileprivate init(content: Int) {
+            self.content = content
+        }
+
         public static func ==(lhs: Index, rhs: Index) -> Bool {
             return lhs.content == rhs.content
         }
