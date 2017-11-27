@@ -283,7 +283,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
 
 
     public func intersection(_ other: BitSet) -> BitSet {
-        return BitSet(content: content & other.content)
+        return .init(content: content & other.content)
     }
 
     /// Returns a new set with the elements of both this and the given set.
@@ -313,7 +313,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     ///   in the result is unspecified.
 
     public func union(_ other: BitSet) -> BitSet {
-        return BitSet(content: content | other.content)
+        return .init(content: content | other.content)
     }
 
     /// Returns a Boolean value indicating whether two values are equal.

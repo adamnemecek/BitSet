@@ -18,7 +18,7 @@ import Foundation
 //print(a)
 let b: BitSet<UInt64> = [1,2,3,4, 30]
 
- 
+
 //for e in b {
 //    print(e)
 //}
