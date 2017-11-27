@@ -6,7 +6,8 @@ class BitSetTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-//        XCTAssertEqual(BitSet().text, "Hello, World!")
+        XCTAssertEqual(BitSet<UInt64>().count, 0)
+
     }
 
 
