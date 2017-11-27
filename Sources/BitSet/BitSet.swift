@@ -1,14 +1,4 @@
 
-
-
-extension String {
-//    func pad(to: Int) -> String {
-//        if count < to {
-//            return
-//        }
-//    }
-}
-
 extension MemoryLayout {
     static var bitSize : Int {
         return size * 8
