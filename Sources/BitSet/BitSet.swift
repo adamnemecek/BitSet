@@ -31,10 +31,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         self.content = content
     }
 
-//    static var max : Element {
-//
-//    }
-
     public init() {
         self.content = 0
     }
@@ -80,7 +76,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var count : IndexDistance {
-        print( content.nonzeroBitCount)
         return content.nonzeroBitCount
     }
 
@@ -89,14 +84,18 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public func index(after i: Index) -> Index {
+        /// find what should be the next one
         let j = i.content + 1
+        /// drop the first six bits from content to find the next element
         let mask  = (content >> j) << j
-
         let n = content & mask
-        if n == 0 {
+        assert(mask == n)
+
+        /// there are no remaining elements, in which case returns the end index
+        if mask == 0 {
             return endIndex
         }
-        return .init(content: n.trailingZeroBitCount)
+        return .init(content: mask.trailingZeroBitCount)
     }
 
 
