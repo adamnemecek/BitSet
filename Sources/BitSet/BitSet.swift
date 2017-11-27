@@ -44,8 +44,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         literal.forEach {
             self.insert($0)
         }
-//        print(String(content, radix: 2), content)
-
     }
 
     public var description: String {
@@ -78,7 +76,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var endIndex: Index {
-        return Index(content: content.leadingZeroBitCount)
+        return Index(content: MemoryLayout<Element>.size * 8 - content.leadingZeroBitCount)
     }
 
     public var count : IndexDistance {
