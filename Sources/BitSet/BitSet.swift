@@ -241,7 +241,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
         /// check that the value is valid
-        assert(newMember <= .max)
+        assert(newMember <= BitSet.max)
         defer {
             self = .init(content: content | (1 << newMember))
         }
