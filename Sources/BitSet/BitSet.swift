@@ -80,6 +80,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var count : IndexDistance {
+        print( content.nonzeroBitCount)
         return content.nonzeroBitCount
     }
 
@@ -92,9 +93,9 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         let mask  = (content >> j) << j
 
         let n = content & mask
-//        if n == 0 {
-//            return endIndex
-//        }
+        if n == 0 {
+            return endIndex
+        }
         return .init(content: n.trailingZeroBitCount)
     }
 
