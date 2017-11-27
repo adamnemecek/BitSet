@@ -5,6 +5,7 @@ extension MemoryLayout {
     }
 }
 
+
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible {
 
     public typealias Key = Int
@@ -32,11 +33,16 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         self.content = 0
     }
 
-    public init(arrayLiteral literal: Element...) {
+    public init<Source : Sequence>(_ sequence: Source) where Element == Source.Element {
         self.init()
-        literal.forEach {
+        sequence.forEach {
             self.insert($0)
         }
+
+    }
+
+    public init(arrayLiteral literal: Element...) {
+        self.init(literal)
     }
 
     public var description: String {
