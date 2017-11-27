@@ -67,12 +67,10 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var startIndex: Index {
-        print("start ", content.trailingZeroBitCount)
         return Index(content: content.trailingZeroBitCount)
     }
 
     public var endIndex: Index {
-        print("end ", content.leadingZeroBitCount)
         return Index(content: content.leadingZeroBitCount)
     }
 
@@ -85,7 +83,15 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public func index(after i: Index) -> Index {
-        return .init(content: i.content + 1)
+        //return .init(content: i.content + 1)
+        let j = i.content + 1
+        let mask  = (content >> j) << j
+
+        let n = content & mask
+        if n == 0 {
+            return endIndex
+        }
+        return .init(content: n.trailingZeroBitCount)
     }
 
 
