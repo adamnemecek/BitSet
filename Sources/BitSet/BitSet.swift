@@ -5,7 +5,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     public typealias IndexDistance = Int
 
     public struct Index : Equatable, Comparable {
-        fileprivate let content : Element
+        fileprivate let content : Int
 
         public static func ==(lhs: Index, rhs: Index) -> Bool {
             return lhs.content == rhs.content
@@ -48,13 +48,11 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var startIndex: Index {
-//        return Index(content: content.trailingZeroBitCount.)
-        return Index(content: 0)
+        return Index(content: content.leadingZeroBitCount)
     }
 
     public var endIndex: Index {
-//        return .init(content: Element.bitWidth - content.leadingZeroBitCount)
-        fatalError()
+        return Index(content: content.trailingZeroBitCount)
     }
 
     public var count : IndexDistance {
@@ -62,7 +60,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public subscript(index : Index) -> Element {
-        return index.content
+        return .init(index.content)
     }
 
     public func index(after i: Index) -> Index {
@@ -293,8 +291,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     public var isEmpty: Bool {
         return content == 0
     }
-
-
 }
 
 
