@@ -48,27 +48,6 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return map { $0.description }.joined(separator: ", ")
     }
 
-    /// Removes the elements of the set that are also in the given set and adds
-    /// the members of the given set that are not already in the set.
-    ///
-    /// In the following example, the elements of the `employees` set that are
-    /// also members of `neighbors` are removed from `employees`, while the
-    /// elements of `neighbors` that are not members of `employees` are added to
-    /// `employees`. In particular, the names `"Alicia"`, `"Chris"`, and
-    /// `"Diana"` are removed from `employees` while the names `"Forlani"` and
-    /// `"Greta"` are added.
-    ///
-    ///     var employees: Set = ["Alicia", "Bethany", "Chris", "Diana", "Eric"]
-    ///     let neighbors: Set = ["Bethany", "Eric", "Forlani", "Greta"]
-    ///     employees.formSymmetricDifference(neighbors)
-    ///     print(employees)
-    ///     // Prints "["Diana", "Chris", "Forlani", "Alicia", "Greta"]"
-    ///
-    /// - Parameter other: A set of the same type.
-    public mutating func formSymmetricDifference(_ other: BitSet) {
-        self = symmetricDifference(other)
-    }
-
     public var startIndex: Index {
         return Index(content: content.trailingZeroBitCount)
     }
@@ -108,6 +87,28 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
             return endIndex
         }
         return .init(content: mask.trailingZeroBitCount)
+    }
+
+
+    /// Removes the elements of the set that are also in the given set and adds
+    /// the members of the given set that are not already in the set.
+    ///
+    /// In the following example, the elements of the `employees` set that are
+    /// also members of `neighbors` are removed from `employees`, while the
+    /// elements of `neighbors` that are not members of `employees` are added to
+    /// `employees`. In particular, the names `"Alicia"`, `"Chris"`, and
+    /// `"Diana"` are removed from `employees` while the names `"Forlani"` and
+    /// `"Greta"` are added.
+    ///
+    ///     var employees: Set = ["Alicia", "Bethany", "Chris", "Diana", "Eric"]
+    ///     let neighbors: Set = ["Bethany", "Eric", "Forlani", "Greta"]
+    ///     employees.formSymmetricDifference(neighbors)
+    ///     print(employees)
+    ///     // Prints "["Diana", "Chris", "Forlani", "Alicia", "Greta"]"
+    ///
+    /// - Parameter other: A set of the same type.
+    public mutating func formSymmetricDifference(_ other: BitSet) {
+        self = symmetricDifference(other)
     }
 
     /// Removes the elements of this set that aren't also in the given set.
@@ -231,8 +232,8 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     ///   other means.
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
-        let max = MemoryLayout<Element>.bitSize
-        assert(newMember < max)
+        /// check that the value is valid
+        assert(newMember < MemoryLayout<Element>.bitSize)
         defer {
             content |= (1 << newMember)
         }
@@ -257,7 +258,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     /// - Returns: A new set.
 
     public func symmetricDifference(_ other: BitSet) -> BitSet {
-        return BitSet(content: content ^ other.content)
+        return .init(content: content ^ other.content)
     }
 
     /// Returns a new set with the elements that are common to both this set and

@@ -22,42 +22,38 @@ let b: BitSet<UInt64> = [1,2,3,4, 30]
 //for e in b {
 //    print(e)
 //}
-print(b)
+
+enum PC : Int {
+    case one
+}
+
+extension RawRepresentable {
+
+}
+
 //public struct PitchSet: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
-//    public struct Index : Comparable {
-//        fileprivate let value : Int
 //
-//        fileprivate init(_ value : Int) {
-//            self.value = value
-//        }
 //
-//        public static func ==(lhs: Index, rhs: Index) -> Bool {
-//            return lhs.value == rhs.value
-//        }
+//    typealias Base = UInt16
+//    public typealias  Element = PC
+//    public typealias Index = BitSet<Base>.Index
 //
-//        public static func <(lhs: Index, rhs: Index) -> Bool {
-//            return lhs.value < rhs.value
-//        }
-//    }
+//    private var content : BitSet<Base>
 //
-//    public typealias Element = PC
-//    public typealias IndexDistance = Int
-//    private typealias Base = UInt16
-//    private var content : Base
 //
 //    public init() {
-//        content = 0
+//        content = []
 //    }
 //
-//    private init(content : Base) {
-//        self.content = content
-//    }
+////    private init(content : Base) {
+////        self.content = content
+////    }
 //
-//    public var inverted : PitchSet {
-//        let shift = Base.bitWidth - 12
-//        let c = ((Base.max ^ content) << shift) >> shift
-//        return PitchSet(content : c)
-//    }
+////    public var inverted : PitchSet {
+////        let shift = Base.bitWidth - 12
+////        let c = ((Base.max ^ content) << shift) >> shift
+////        return PitchSet(content : c)
+////    }
 //
 //
 //    public init(arrayLiteral literal: Element...) {
@@ -71,7 +67,7 @@ print(b)
 //    public var startIndex: Index {
 //        /// we need to modulo by 32 because in the case where there are 0 elements,
 //        /// we want a 0, not 32
-//        return .init(content.trailingZeroBitCount % Base.bitWidth)
+//        return content.startIndex
 //    }
 //
 //    public var description: String {
