@@ -31,13 +31,20 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         self.content = content
     }
 
+//    static var max : Element {
+//
+//    }
+
     public init() {
         self.content = 0
     }
 
     public init(arrayLiteral literal: Element...) {
-        content = literal.reduce(0) { $0 | (1 << $1) }
-        print(String(content, radix: 2), content)
+        self.init()
+        literal.forEach {
+            self.insert($0)
+        }
+//        print(String(content, radix: 2), content)
 
     }
 
@@ -216,8 +223,10 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     ///   other means.
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
+        let max = MemoryLayout<Element>.size * 8
+        assert(newMember < max)
         defer {
-            content = content | newMember
+            content |= (1 << newMember)
         }
         return (contains(newMember), newMember)
     }
