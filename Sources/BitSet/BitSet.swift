@@ -1,10 +1,11 @@
 
 
-public struct BitSet<Base: FixedWidthInteger>: SetAlgebra, Collection {
-    public typealias Element = Int
+public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection {
+//    public typealias Element = Base
+    public typealias IndexDistance = Int
 
     public struct Index : Equatable, Comparable {
-        fileprivate let content : Int
+        fileprivate let content : Element
 
         public static func ==(lhs: Index, rhs: Index) -> Bool {
             return lhs.content == rhs.content
@@ -15,9 +16,9 @@ public struct BitSet<Base: FixedWidthInteger>: SetAlgebra, Collection {
         }
     }
 
-    private var content : Base
+    private var content : Element
 
-    private init(content : Base) {
+    private init(content : Element) {
         self.content = content
     }
 
@@ -47,20 +48,21 @@ public struct BitSet<Base: FixedWidthInteger>: SetAlgebra, Collection {
     }
 
     public var startIndex: Index {
-        fatalError()
-        //content.leadingZeroBitCount
+//        return Index(content: content.trailingZeroBitCount.)
+        return Index(content: 0)
     }
 
     public var endIndex: Index {
+//        return .init(content: Element.bitWidth - content.leadingZeroBitCount)
         fatalError()
     }
 
-    public var count : Int {
+    public var count : IndexDistance {
         return content.nonzeroBitCount
     }
 
     public subscript(index : Index) -> Element {
-        fatalError()
+        return index.content
     }
 
     public func index(after i: Index) -> Index {
@@ -190,7 +192,7 @@ public struct BitSet<Base: FixedWidthInteger>: SetAlgebra, Collection {
     @discardableResult
     public mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element) {
         defer {
-            //content =  content | newMember
+            content =  content | newMember
         }
         return (contains(newMember), newMember)
     }
@@ -285,25 +287,8 @@ public struct BitSet<Base: FixedWidthInteger>: SetAlgebra, Collection {
     }
 
     public func contains(_ member: Element) -> Bool {
-//        return (content & member) != 0
-        fatalError()
+        return (content & member) != 0
     }
-
-    public func contains(_ member: Slice<BitSet<Element>>) -> Bool {
-        fatalError()
-    }
-
-//    public mutating func insert(_ newMember: Slice<BitSet<Element>>) -> (inserted: Bool, memberAfterInsert: Slice<BitSet<Element>>) {
-//        fatalError()
-//    }
-//
-//    public mutating func remove(_ member: Slice<BitSet<Element>>) -> Slice<BitSet<Element>>? {
-//        fatalError()
-//    }
-//
-//    public mutating func update(with newMember: Slice<BitSet<Element>>) -> Slice<BitSet<Element>>? {
-//        fatalError()
-//    }
 
     public var isEmpty: Bool {
         return content == 0
