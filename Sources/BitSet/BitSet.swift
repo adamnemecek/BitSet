@@ -7,7 +7,6 @@ extension MemoryLayout {
 
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
 
-//    public typealias Key = Int
     public typealias IndexDistance = Int
 
     public struct Index : Equatable, Comparable {
@@ -41,7 +40,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public init() {
-        self.content = 0
+        self.init(content: 0)
     }
 
     public init<Source : Sequence>(_ sequence: Source) where Element == Source.Element {
@@ -71,20 +70,9 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return content.nonzeroBitCount
     }
 
-
     public subscript(index : Index) -> Element {
         return .init(index.content)
     }
-
-    //    public func index(for key: Key) -> Index {
-    //        return .init(content: key)
-    //    }
-
-//    public subscript(key : Key) -> Element? {
-//        let e = Element(key)
-//        guard contains(e) else { return nil }
-//        return e
-//    }
 
     public func index(after i: Index) -> Index {
         /// find what should be the next one, note that max value is Element.bitSize
@@ -354,5 +342,4 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return content == 0
     }
 }
-
 
