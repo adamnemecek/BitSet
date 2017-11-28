@@ -5,6 +5,17 @@ hey it's me ur fav datastructure, [BitSet](https://en.wikipedia.org/wiki/Bit_arr
 # Installation
 Use Swift Package Manager. 
 
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "WebMIDIKitDemo",
+    dependencies: [
+      .Package(url: "https://github.com/adamnemecek/BitSet.git", majorVersion: 1)
+    ]
+)
+```
+
 # Usage
 
 ```swift
