@@ -31,7 +31,6 @@ class BitSetTests: XCTestCase {
 
 //        XCTAssertEqual(a + [1,10], )
 
-
     }
 
 

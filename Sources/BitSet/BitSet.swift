@@ -89,6 +89,9 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return .init(content: mask.trailingZeroBitCount)
     }
 
+    public func negated() -> BitSet {
+        return .init(content: ~content)
+    }
 
     /// Removes the elements of the set that are also in the given set and adds
     /// the members of the given set that are not already in the set.
