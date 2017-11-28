@@ -2,12 +2,12 @@
 
 hey it's me ur fav datastructure. [BitSet](https://en.wikipedia.org/wiki/Bit_array). This implementation is uses a fixed sized unsigned integer as for it's backing. Yes, you can only store 64 or [128](https://github.com/Jitsusama/UInt128) bits but a lot of times that's enough and this way, it's fast as shit (💩). Uses intrinsics to be fast.
 
-#Installation
+# Installation
 Use Swift Package Manager. 
 
 # Usage
 
-```
+```swift
 import BitSet
 
 typealias BitSet64 = BitSet<UInt64>
@@ -26,10 +26,9 @@ let c = b.union([20,30]) /// => BitSet([1,2,3,4,10,20,30])
 
 ```
 
-#Documentation
+# Documentation
 
-```
-
+```swift
 public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, Collection, ExpressibleByArrayLiteral, CustomStringConvertible, Hashable {
     struct Index {
         /// ...
