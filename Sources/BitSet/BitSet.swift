@@ -1,6 +1,6 @@
 
 extension MemoryLayout {
-    static var bitSize : Int {
+    static var bitSize: Int {
         return size * 8
     }
 }
@@ -10,7 +10,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     public typealias IndexDistance = Int
 
     public struct Index : Equatable, Comparable {
-        fileprivate let content : Int
+        fileprivate let content: Int
 
         fileprivate init(content: Int) {
             self.content = content
@@ -25,17 +25,17 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         }
     }
 
-    public static var min : Element {
+    public static var min: Element {
         return .init()
     }
 
-    public static var max : Element {
+    public static var max: Element {
         return .init(MemoryLayout<Element>.bitSize - 1)
     }
 
-    private let content : Element
+    private let content: Element
 
-    private init(content : Element) {
+    private init(content: Element) {
         self.content = content
     }
 
@@ -43,7 +43,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         self.init(content: 0)
     }
 
-    public init<Source : Sequence>(_ sequence: Source) where Element == Source.Element {
+    public init<Source: Sequence>(_ sequence: Source) where Element == Source.Element {
         self.init()
         sequence.forEach {
             self.insert($0)
@@ -66,11 +66,11 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         return Index(content: MemoryLayout<Element>.bitSize - content.leadingZeroBitCount)
     }
 
-    public var count : IndexDistance {
+    public var count: IndexDistance {
         return content.nonzeroBitCount
     }
 
-    public subscript(index : Index) -> Element {
+    public subscript(index: Index) -> Element {
         return .init(index.content)
     }
 
