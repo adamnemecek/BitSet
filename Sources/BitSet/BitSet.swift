@@ -59,11 +59,11 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
     }
 
     public var startIndex: Index {
-        return Index(content: content.trailingZeroBitCount)
+        return .init(content: content.trailingZeroBitCount)
     }
 
     public var endIndex: Index {
-        return Index(content: MemoryLayout<Element>.bitSize - content.leadingZeroBitCount)
+        return .init(content: MemoryLayout<Element>.bitSize - content.leadingZeroBitCount)
     }
 
     public var count: IndexDistance {
@@ -78,9 +78,7 @@ public struct BitSet<Element: FixedWidthInteger & UnsignedInteger>: SetAlgebra, 
         /// find what should be the next one, note that max value is Element.bitSize
         let j = i.content + 1
         /// drop the first six bits from content to find the next element
-        let mask  = (content >> j) << j
-//        let n = content & mask
-//        assert(mask == n)
+        let mask = (content >> j) << j
 
         /// there are no remaining elements, in which case returns the end index
         if mask == 0 {
