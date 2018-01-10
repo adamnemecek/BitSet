@@ -1,6 +1,6 @@
 # BitSet
 
-hey it's me ur fav datastructure, [BitSet](https://en.wikipedia.org/wiki/Bit_array). This implementation is generic and uses a fixed size unsigned integer as it's backing storage. Yes, you can only store 64 or [128](https://github.com/Jitsusama/UInt128) bits but a lot of times that's enough and this way, it's fast as shit (💩) through the magic of intrinsics.
+hey it's me ur fav datastructure, [BitSet](https://en.wikipedia.org/wiki/Bit_array). This implementation is generic and uses a fixed size unsigned integer as it's backing storage. Yes, you can only store 8, 16, 32, 64 or [128](https://github.com/Jitsusama/UInt128) bits but a lot of times that's enough and this way, it's fast as shit (💩) through the magic of intrinsics.
 
 [TRY IT IN YOUR BROWSER](http://swift.sandbox.bluemix.net/#/repl/5a1df029df5afc5405d01f3d)
 
